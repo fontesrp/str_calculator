@@ -1,15 +1,17 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-#include "node.h"
+#include "calculator.h"
+
+#define MAX_STR_SIZE 1000
 
 int main(int argc, const char * argv[]) {
 
-    // 1. Implement a binary tree using a double linked list
-    // 2. Get string input
-    // 3. Go through string from left to right
-    // 4. Store number and operation
-    // 5. Use operation to figure out the place in the binary tree
+    char szExpression[MAX_STR_SIZE + 1];
+
+    printf("Plese enter expression: ");
+    fgets(szExpression, MAX_STR_SIZE + 1, stdin);
+
+    printf("\nSolution = %ld\n", lSolveEquation(szExpression, MAX_STR_SIZE));
 
     return 0;
 }
