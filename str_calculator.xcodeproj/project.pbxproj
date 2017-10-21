@@ -10,6 +10,8 @@
 		B37FE6B41F93B73C00932A55 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = B37FE6B31F93B73C00932A55 /* tree.c */; };
 		B3CA79EB1F9377FC00CC1822 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = B3CA79EA1F9377FC00CC1822 /* main.c */; };
 		B3CA79F21F9388BB00CC1822 /* node.c in Sources */ = {isa = PBXBuildFile; fileRef = B3CA79F11F9388BB00CC1822 /* node.c */; };
+		B3CB73761F9B6309007104BC /* calculator.c in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73731F9B6308007104BC /* calculator.c */; };
+		B3CB73771F9B6309007104BC /* stack.c in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73741F9B6309007104BC /* stack.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +33,10 @@
 		B3CA79EA1F9377FC00CC1822 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		B3CA79F11F9388BB00CC1822 /* node.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = node.c; sourceTree = "<group>"; };
 		B3CA79F31F9388DE00CC1822 /* node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = node.h; sourceTree = "<group>"; };
+		B3CB73721F9B6308007104BC /* stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
+		B3CB73731F9B6308007104BC /* calculator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = calculator.c; sourceTree = "<group>"; };
+		B3CB73741F9B6309007104BC /* stack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stack.c; sourceTree = "<group>"; };
+		B3CB73751F9B6309007104BC /* calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calculator.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +70,14 @@
 			isa = PBXGroup;
 			children = (
 				B3CA79EA1F9377FC00CC1822 /* main.c */,
+				B3CB73751F9B6309007104BC /* calculator.h */,
+				B3CB73731F9B6308007104BC /* calculator.c */,
+				B3CA79F31F9388DE00CC1822 /* node.h */,
+				B3CA79F11F9388BB00CC1822 /* node.c */,
+				B3CB73721F9B6308007104BC /* stack.h */,
+				B3CB73741F9B6309007104BC /* stack.c */,
 				B37FE6B21F93B73C00932A55 /* tree.h */,
 				B37FE6B31F93B73C00932A55 /* tree.c */,
-				B3CA79F11F9388BB00CC1822 /* node.c */,
-				B3CA79F31F9388DE00CC1822 /* node.h */,
 			);
 			path = str_calculator;
 			sourceTree = "<group>";
@@ -129,9 +139,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3CB73771F9B6309007104BC /* stack.c in Sources */,
 				B37FE6B41F93B73C00932A55 /* tree.c in Sources */,
 				B3CA79EB1F9377FC00CC1822 /* main.c in Sources */,
 				B3CA79F21F9388BB00CC1822 /* node.c in Sources */,
+				B3CB73761F9B6309007104BC /* calculator.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
