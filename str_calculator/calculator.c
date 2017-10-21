@@ -104,6 +104,8 @@ long lSolveEquation(char * szExpression, unsigned int uiMaxExpSize) {
         op = opGet(szExpression[lIdx]);
 
         tCalc.m_placeOp(&tCalc, op, lNum);
+
+        lIdx++;
     }
 
     // TODO: what's the best size here?
