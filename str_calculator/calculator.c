@@ -21,7 +21,7 @@ static long lPerformOp(long lOperand1, long lOperand2, enum opearations op) {
     }
 }
 
-static void handleTreeEle(long lNodeVal) {
+static void handleTreeNodes(long lNodeVal) {
 
     long lOperand1;
     long lOperand2;
@@ -73,47 +73,36 @@ static long lStr2num(char * szStr, long * lIdx) {
     return lNum;
 }
 
-static void jumpEmpty(char * szStr, long * lIdx) {
-
-    while ( \
-        szStr[*lIdx] == ' ' \
-        || szStr[*lIdx] == '\t' \
-        || szStr[*lIdx] == '\n' \
-        || szStr[*lIdx] == '\r' \
-    ) {
-        (*lIdx)++;
-    }
-}
-
-long lSolveEquation(char * szExpression, unsigned int uiMaxExpSize) {
+static void formTree(struct SCalcBTree * tCalc, char * szExpression, unsigned int uiExpSize) {
 
     long lIdx = 0;
     long lNum;
     enum opearations op;
-    struct SCalcBTree tCalc = tNewTree(uiMaxExpSize);
-    long result;
 
-    while (lIdx < uiMaxExpSize && szExpression[lIdx] != '\0') {
-
-        jumpEmpty(szExpression, &lIdx);
+    while (lIdx < uiExpSize && szExpression[lIdx] != '\0') {
 
         lNum = lStr2num(szExpression, &lIdx);
 
-        jumpEmpty(szExpression, &lIdx);
-
         op = opGet(szExpression[lIdx]);
 
-        tCalc.m_placeOp(&tCalc, op, lNum);
+        tCalc->m_placeOp(tCalc, op, lNum);
 
         lIdx++;
     }
+}
+
+long lSolveEquation(char * szExpression, unsigned int uiExpSize) {
+
+    struct SCalcBTree tCalc = tNewTree(uiExpSize);
+
+    formTree(&tCalc, szExpression, uiExpSize);
 
     // TODO: what's the best size here?
-    stOps = newStack(uiMaxExpSize);
+    stOps = newStack(tCalc.m_uiNodeQtt);
 
-    tCalc.m_postorder(&tCalc, handleTreeEle);
+    tCalc.m_postorder(&tCalc, handleTreeNodes);
 
-    result = stOps.m_pop(&stOps);
+    long result = stOps.m_pop(&stOps);
 
     tCalc.m_destroy(&tCalc);
     stOps.m_destroy(&stOps);
