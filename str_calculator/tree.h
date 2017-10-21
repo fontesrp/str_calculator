@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "node.h"
+#include "stack.h"
 
 enum opearations {
     NOP = -6,
@@ -32,7 +33,7 @@ struct SCalcBTree {
     void (* m_setCurrNode)(struct SCalcBTree * this, struct SNode * pnNode);
     void (* m_setRoot)(struct SCalcBTree * this, struct SNode * pnNode);
     long (* m_lParentOp)(struct SCalcBTree * this);
-    void (* m_postorder)(struct SCalcBTree * this, void (* cb)(struct SNode * pnNode));
+    void (* m_postorder)(struct SCalcBTree * this, void (* cb)(long lNodeVal));
     void (* m_placeOp)(struct SCalcBTree * this, enum opearations op, long lValue);
 
     void (* m_destroy)(struct SCalcBTree * this);

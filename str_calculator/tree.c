@@ -35,6 +35,8 @@ static struct SNode * pnAddNode(struct SCalcBTree * this) {
 
     struct SNode * pn = &(this->m_prgnNodes[this->m_uiNodeQtt]);
 
+    pn->m_setIdx(pn, this->m_uiNodeQtt);
+
     this->m_uiNodeQtt++;
 
     return pn;
@@ -55,7 +57,58 @@ static long lParentOp(struct SCalcBTree * this) {
     return lOp;
 }
 
-// static void postorder(struct SCalcBTree * this, void (* cb)(struct SNode * pnNode)) {}
+static void stackLeftBranch(struct Stack * pst, struct SNode * pn) {
+
+    pst->m_lPush(pst, pn->m_lGetIdx(pn));
+
+    while ((pn = pn->m_pnGetLChild(pn)) != NULL) {
+        pst->m_lPush(pst, pn->m_lGetIdx(pn));
+    }
+}
+
+static void postorder(struct SCalcBTree * this, void (* cb)(long lNodeVal)) {
+
+    struct Stack stMain = newStack(this->m_uiNodeQtt);
+    struct Stack stRight = newStack(this->m_uiNodeQtt);
+
+    struct SNode nCurr = this->m_prgnNodes[this->m_pnRoot->m_lGetIdx(this->m_pnRoot)];
+    long lCurrIdx;
+    long lRightIdx;
+
+    stackLeftBranch(&stMain, &nCurr);
+
+    while (!stMain.m_bIsEmpty(&stMain)) {
+
+        lCurrIdx = stMain.m_pop(&stMain);
+        nCurr = this->m_prgnNodes[lCurrIdx];
+
+        if (nCurr.m_pnGetRChild(&nCurr) != NULL) {
+
+            lRightIdx = (stRight.m_bIsEmpty(&stRight)) ? -1 : stRight.m_pop(&stRight);
+
+            if (lCurrIdx == lRightIdx) {
+                // Curr node already had its right branch checked
+                cb(nCurr.m_lGetValue(&nCurr));
+            } else {
+
+                stMain.m_lPush(&stMain, lCurrIdx);
+
+                stackLeftBranch(&stMain, nCurr.m_pnGetRChild(&nCurr));
+
+                if (lRightIdx != -1) {
+                    stRight.m_lPush(&stRight, lRightIdx);
+                }
+
+                stRight.m_lPush(&stRight, lCurrIdx);
+            }
+        } else {
+            cb(nCurr.m_lGetValue(&nCurr));
+        }
+    }
+
+    stMain.m_destroy(&stMain);
+    stRight.m_destroy(&stRight);
+}
 
 static void placeOp(struct SCalcBTree * this, enum opearations currOp, long lValue) {
 
@@ -157,7 +210,7 @@ static void construct(struct SCalcBTree * this, unsigned int uiMaxNodes) {
     this->m_setCurrNode = setCurrNode;
     this->m_setRoot = setRoot;
     this->m_lParentOp = lParentOp;
-    // this->m_postorder = postorder;
+    this->m_postorder = postorder;
     this->m_placeOp = placeOp;
 
     this->m_destroy = destroy;
