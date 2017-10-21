@@ -16,6 +16,7 @@ struct Stack {
 
     STACK_DATA_TYPE (* m_pop)(struct Stack * this);
     long (* m_lPush)(struct Stack * this, STACK_DATA_TYPE newElement);
+    int (* m_bIsEmpty)(struct Stack * this);
 
     void (* m_destroy)(struct Stack * this);
     void (* m_constructor)(struct Stack * this, long lStSize);
