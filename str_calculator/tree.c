@@ -169,10 +169,9 @@ static void destroy(struct SCalcBTree * this) {
 
     struct SNode n;
 
-    while (this->m_uiNodeQtt > 0) {
+    while (--this->m_uiNodeQtt > 0) {
         n = this->m_prgnNodes[this->m_uiNodeQtt];
         n.m_destroy(&n);
-        this->m_uiNodeQtt--;
     }
 
     free(this->m_prgnNodes);
