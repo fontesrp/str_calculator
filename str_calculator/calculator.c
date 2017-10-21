@@ -21,19 +21,19 @@ static long lPerformOp(long lOperand1, long lOperand2, enum opearations op) {
     }
 }
 
-static void handleTreeEle(long ele) {
+static void handleTreeEle(long lNodeVal) {
 
     long lOperand1;
     long lOperand2;
 
-    if (ele < 0) {
-        // If ele is operation, perform it and store result
+    if (lNodeVal < 0) {
+        // If lNodeVal is operation, perform it and store result
         lOperand2 = stOps.m_pop(&stOps);
         lOperand1 = stOps.m_pop(&stOps);
-        stOps.m_lPush(&stOps, lPerformOp(lOperand1, lOperand2, ele));
+        stOps.m_lPush(&stOps, lPerformOp(lOperand1, lOperand2, lNodeVal));
     } else {
-        // Else, store ele to be a future operand
-        stOps.m_lPush(&stOps, ele);
+        // Else, store lNodeVal to be a future operand
+        stOps.m_lPush(&stOps, lNodeVal);
     }
 }
 
