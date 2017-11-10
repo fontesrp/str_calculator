@@ -27,7 +27,9 @@ struct SCalcBTree {
     struct SNode * m_pnCurr;
 
     struct SNode * (* m_pnGetCurrNode)(struct SCalcBTree * this);
+    struct SNode * (* m_pnGetCurrPar)(struct SCalcBTree * this);
     struct SNode * (* m_pnGetRoot)(struct SCalcBTree * this);
+    struct SNode * (* m_pnGetNodeByIdx)(struct SCalcBTree * this, long lIdx);
     struct SNode * (* m_pnAddNode)(struct SCalcBTree * this);
 
     void (* m_setCurrNode)(struct SCalcBTree * this, struct SNode * pnNode);

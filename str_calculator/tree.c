@@ -17,8 +17,19 @@ static struct SNode * pnGetCurrNode(struct SCalcBTree * this) {
     return this->m_pnCurr;
 }
 
+static struct SNode * pnGetCurrPar(struct SCalcBTree * this) {
+
+    struct SNode * curr = this->m_pnGetCurrNode(this);
+
+    return curr->m_pnGetParent(curr);
+}
+
 static struct SNode * pnGetRoot(struct SCalcBTree * this) {
     return this->m_pnRoot;
+}
+
+static struct SNode * pnGetNodeByIdx(struct SCalcBTree * this, long lIdx) {
+    return &(this->m_prgnNodes[lIdx]);
 }
 
 static void setCurrNode(struct SCalcBTree * this, struct SNode * pnNode) {
@@ -203,7 +214,9 @@ static void construct(struct SCalcBTree * this, unsigned int uiMaxNodes) {
     this->m_uiNodeQtt = 0;
 
     this->m_pnGetCurrNode = pnGetCurrNode;
+    this->m_pnGetCurrPar = pnGetCurrPar;
     this->m_pnGetRoot = pnGetRoot;
+    this->m_pnGetNodeByIdx = pnGetNodeByIdx;
     this->m_pnAddNode = pnAddNode;
 
     this->m_setCurrNode = setCurrNode;
